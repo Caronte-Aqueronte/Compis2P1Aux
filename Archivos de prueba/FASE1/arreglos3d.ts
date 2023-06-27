@@ -23,7 +23,7 @@ let score: any = [
 }*/
 
 function imprimirReporte(value: number, i: number, j: number, k: number) {
-    console.log(mapas[i] + ", " + enemigos[j] + ", " + jugadores[k] + ", " + value);
+    console.log(mapas[i] , ", " , enemigos[j] , ", " , jugadores[k] , ", " , value);
 }
 
 function imprimirScore(array: number[]) {
