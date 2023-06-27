@@ -21,14 +21,14 @@ class Funcion(Abstract):
             if self.validacion_salida_funccion(result):
                 val = {"value": result['value'], "tipo": result['tipo'],
                        "tipo_secundario": result['tipo_secundario'], "linea": self.linea, "columna": self.columna}
-                print(f'Funcion -> {self.id} retorna -> ', val)
+                # print(f'Funcion -> {self.id} retorna -> ', val)
                 return val
                 # print('aquies es')
                 # return {"value": result['value'], "tipo": result['tipo'], "tipo_secundario": result['tipo_tiposecundario'], "linea": self.linea, "columna": self.columna}
             else:
                 val = {"value": None, "tipo": self.tipo, "tipo_secundario": self.tipo_secundario,
                        "linea": self.linea, "columna": self.columna}
-                print(f'Funcion -> {self.id} retorna -> ', val)
+                # print(f'Funcion -> {self.id} retorna -> ', val)
                 return val
                 # if result != None:
                 #     # Validar el tipo de retorno de la funcion
@@ -43,7 +43,7 @@ class Funcion(Abstract):
         else:
             val = {"value": None, "tipo": self.tipo, "tipo_secundario": self.tipo_secundario,
                    "linea": self.linea, "columna": self.columna}
-            print(f'Funcion -> {self.id} retorna -> ', val)
+            # print(f'Funcion -> {self.id} retorna -> ', val)
             return val
             # return {"value": '', "tipo": TipoEnum.ANY, "tipo_secundario": None, "linea": self.linea, "columna": self.columna}
 

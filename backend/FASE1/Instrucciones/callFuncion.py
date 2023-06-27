@@ -48,7 +48,7 @@ class CallFuncion(Abstract):
                                 self.asignacion_valor_funcion(param_fun.id,scope_funcion,result)
                         # scope_funcion.imprimir()
                         fun.ejecutar(scope_funcion)
-                    except Exception as e:
+                    except ValueError as e:
                         print(
                             'Semantico', f'Error al ejecutar la funcion {str(e)}', self.linea, self.columna)
                         self.resultado.add_error(

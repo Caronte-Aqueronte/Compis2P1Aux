@@ -108,25 +108,26 @@ class Declaracion(Abstract):
                     print('Semantico', str(error), self.linea, self.columna)
         elif self.tipo == TipoEnum.STRUCT:
             if self.tipo == result_expresion['tipo']:
-                print('--->>DEBUG', result_expresion)
-                print('--->>DEBUG',  self.tipo_secundario)
                 if result_expresion['tipo_secundario'] == self.tipo_secundario:
                     try:
-                        scope.declarar_variable(
-                            self.id, result_expresion['value'], result_expresion['tipo'], result_expresion['tipo_secundario'], self.linea, self.columna)
-
+                        scope.declarar_variable(self.id, result_expresion['value'], result_expresion['tipo'], result_expresion['tipo_secundario'], self.linea, self.columna)
                     except ValueError as error:
                         self.resultado.add_error('Semantico', str(
                             error), self.linea, self.columna)
                         print('Semantico', str(error),
                               self.linea, self.columna)
                 else:
-                    error = f'No puede declarar un varaible struct tipo "{self.tipo_secundario}" y asignar un struct de tipo {result_expresion["tipo_secundario"]}'
-                    self.resultado.add_error(
-                        'Semantico', error, self.linea, self.columna)
+                    if result_expresion['value'] == None:
+                        try:
+                            scope.declarar_variable(self.id, result_expresion['value'], result_expresion['tipo'], self.tipo_secundario, self.linea, self.columna)
+                        except ValueError as error:
+                            self.resultado.add_error('Semantico', str(error), self.linea, self.columna)
+                            print('Semantico', str(error),self.linea, self.columna)
+                    else:
+                        error = f'No puede declarar un varaible struct tipo "{self.tipo_secundario}" y asignar un struct de tipo {result_expresion["tipo_secundario"]}'
+                        self.resultado.add_error('Semantico', error, self.linea, self.columna)
             else:
-                error = 'No puede declarar un varaible struct y asignar un tipo: ' + \
-                    str(result_expresion['tipo'])
+                error = 'No puede declarar un varaible struct y asignar un tipo: ' + str(result_expresion['tipo'])
                 self.resultado.add_error(
                     'Semantico', error, self.linea, self.columna)
         else:
