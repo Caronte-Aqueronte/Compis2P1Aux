@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import * as ace from 'ace-builds';
 import { EditorComponent } from '../editor/editor.component';
-
+import { Clipboard } from '@angular/cdk/clipboard';
 @Component({
   selector: 'app-editor2',
   templateUrl: './editor2.component.html',
@@ -33,6 +33,10 @@ export class Editor2Component implements AfterViewInit {
 
 
   @Output() sendCodigo = new EventEmitter<string>();
+
+  constructor(private clipboard: Clipboard){
+
+  }
 
   onKeyDownEvent(event: any) {
     if (event.key == 'Tab') {
@@ -132,14 +136,14 @@ export class Editor2Component implements AfterViewInit {
     aceEditor.selectAll();
     var selectedText = aceEditor.getCopyText();
     let self = this;
-    navigator.clipboard.writeText(selectedText).then(() => {
-      self.copiarTextoText = 'Codigo Copiado!!!'
-      setTimeout(() => {
-        self.copiarTextoText = 'Copiar Codigo'
-      }, 5000);
-    }).catch((err) => {
-      console.error("Error al copiar el texto: ", err)
-    })
+
+    this.clipboard.copy(selectedText);
+
+    self.copiarTextoText = 'Codigo Copiado!!!'
+
+    setTimeout(() => {
+      self.copiarTextoText = 'Copiar Codigo'
+    }, 5000);
   }
   public cargarCodigo() {
     let input: HTMLInputElement = document.createElement('input');
