@@ -50,6 +50,10 @@ export class DireccionesPageComponent implements AfterViewInit {
       this.setConsola();
       this.setTablaErrores();
     }
+
+    if(localStorage.getItem('ip') != null){
+      this.formIp.controls['ip'].setValue(localStorage.getItem('ip'));
+    }
   }
 
   public setConsola(): void {
@@ -87,8 +91,10 @@ export class DireccionesPageComponent implements AfterViewInit {
       console.log(r);
       localStorage.removeItem('code_c3d');
       localStorage.removeItem('c3d');
+      localStorage.removeItem('ip');
       localStorage.setItem('c3d', JSON.stringify(r));
       localStorage.setItem('code_c3d', this.codigo);
+      localStorage.setItem('ip', ip);
       this.refreshPage(); //mandamos ha refrescar la pagina
     });
   }

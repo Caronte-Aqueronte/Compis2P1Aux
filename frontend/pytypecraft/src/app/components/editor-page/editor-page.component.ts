@@ -60,6 +60,10 @@ export class EditorPageComponent implements AfterViewInit {
       this.setConsola();
       this.setTablaErrores();
     }
+
+    if(localStorage.getItem('ip') != null){
+      this.formIp.controls['ip'].setValue(localStorage.getItem('ip'));
+    }
   }
   public setConsola(): void {
     //borramos el contenido de la consola
@@ -94,8 +98,10 @@ export class EditorPageComponent implements AfterViewInit {
       console.log(r);
       localStorage.removeItem('compile');
       localStorage.removeItem('code');
+      localStorage.removeItem('ip');
       localStorage.setItem('compile', JSON.stringify(r));
       localStorage.setItem('code', this.codigo);
+      localStorage.setItem('ip', ip);
       this.refreshPage(); //mandamos ha refrescar la pagina
     });
   }
